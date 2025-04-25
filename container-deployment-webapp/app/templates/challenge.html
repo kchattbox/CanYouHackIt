@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can You Hack Me?</title>
+    <style>
+        body {
+            background: #121212;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #00FF00;
+            text-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .ip-address {
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .instructions {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 18px;
+            color: #CCCCCC;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 80%;
+            margin: 30px auto 0;
+            flex-wrap: wrap;
+        }
+        .button {
+            background-color: #2A2A2A;
+            color: #00FF00;
+            border: 1px solid #00FF00;
+            padding: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #00FF00;
+            color: #121212;
+        }
+        .hint {
+            display: none;
+            margin: 10px auto;
+            width: 80%;
+            color: #FF6600;
+            font-size: 14px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-left: 3px solid #FF6600;
+        }
+        .launch-button {
+            background-color: #FF3300;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px rgba(255, 51, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+        .launch-button:hover {
+            background-color: #CC2900;
+            transform: scale(1.05);
+        }
+        .loading {
+            display: none;
+            color: #00FF00;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .challenge-content {
+            display: none; /* Initially hidden */
+            width: 100%;
+            text-align: center;
+        }
+        .container-status {
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+            color: #FF6600;
+        }
+        .timer {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #999;
+        }
+        .flag-submission {
+            margin-top: 40px;
+            text-align: center;
+        }
+        input[type="text"] {
+            background-color: #222;
+            color: #00FF00;
+            border: 1px solid #00FF00;
+            padding: 10px;
+            width: 300px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Can You Hack It?</h1>
+    
+    <div id="containerStatus" class="container-status">Target is ...</div>
+    <div id="containerTimer" class="timer">Targets are deleted after 30 minutes<!--Target will be deleted in: TBD--></div>
+    
+    <div id="challengeContent" class="challenge-content" style="display: block;">
+        <h2>Target IP: <span id="containerIp" class="ip-address">Loading...</span></h2>
+        
+        <div class="instructions">
+            <p>Welcome to Can You Hack It! Can You Hack It is a designed to introduce beginners to the fundamentals of penetration testing. Your mission is to hack the above IP address and exfiltrate the data from the 'flag.txt' file. Don't be afraid to use the hints below as guide. There is just one catch, Metasploit wont work for this one hehe 😏. Good luck hacker!</p>
+        </div>
+
+        <div class="button-container">
+            <button class="button" onclick="revealHint(1)">Hint 1</button>
+            <button class="button" onclick="revealHint(2)">Hint 2</button>
+            <button class="button" onclick="revealHint(3)">Hint 3</button>
+            <button class="button" onclick="revealHint(4)">Hint 4</button>
+            <button class="button" onclick="revealHint(5)">Hint 5: SPOILER</button>
+        </div>
+
+        <div class="hint" id="hint-1">Hint 1: Can you figure out what services/apps are running on the server? Maybe you could scan the IP address?</div>
+        <div class="hint" id="hint-2">Hint 2: Hmm… what version of the discovered service is running?</div>
+        <div class="hint" id="hint-3">Hint 3: What does google know about this specific version of the service?</div>
+        <div class="hint" id="hint-4">Hint 4: You can exploit the service mannually or automatically, either one works.</div>
+        <div class="hint" id="hint-5">Hint 5 SPOILER: You need to exploit the vulnerable FTP service running vsftpd 2.3.4 on port 21. Use Google to find the exploit or exploit it manually, once you are connected just cat out 'flag.txt' and submit!</div>
+
+        <div class="flag-submission">
+            <input type="text" id="flagInput" placeholder="Enter the flag...">
+            <button class="button" onclick="checkFlag()">Submit Flag</button>
+            <p id="flagResult" style="margin-top: 10px;"></p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
+<script src="{{ url_for('static', filename='js/challenge.js') }}"></script>
+
+</body></html>

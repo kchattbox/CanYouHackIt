@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Hacking Target</title>
+    <style>
+        /* Include the common styles that are shared across the files, like body, button styles, etc. */
+        body {
+            background: #121212;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .launch-button {
+            background-color: #FF3300;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px rgba(255, 51, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+        .launch-button:hover {
+            background-color: #CC2900;
+            transform: scale(1.05);
+        }
+
+        .loading {
+            display: none;
+            color: #00FF00;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Can You Hack It?</h1>
+
+    <div id="launchButtonContainer">
+        <button id="launchButton" class="launch-button">Launch Target</button>
+        <div id="loadingMessage" class="loading">Launching target... please wait... This may take up to 30 seconds...</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
+<script src="{{ url_for('static', filename='js/launch.js') }}"></script>
+<script src="{{ url_for('static', filename='js/fp.js') }}"></script>
+</body>
+</html>

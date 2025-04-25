@@ -1,0 +1,5 @@
+Flask
+azure-identity
+azure-mgmt-containerinstance
+gunicorn
+requests
